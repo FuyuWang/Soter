@@ -1,0 +1,12 @@
+problem:
+  C: 96
+  Hdilation: 1
+  Hstride: 1
+  K: 24
+  N: 1
+  P: 56
+  Q: 56
+  R: 1
+  S: 1
+  Wdilation: 1
+  Wstride: 1

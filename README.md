@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ### Run Soter on Simba ###
 
 ```
-cd Simba
+cd SpatialAccelerators/Simba
 sh run.sh
 ```
 

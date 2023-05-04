@@ -86,14 +86,15 @@ def run():
     print(f'Fitness Objective: {fitness}')
     density = opt.density.split(',')
     density = {'Inputs': float(density[0]), 'Outputs': float(density[1]), 'Weights': float(density[2])}
+    problem_dir = '../../../TensorComputations'
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     architectures = ['eyeriss', 'eyeriss_2x', 'eyeriss_4x', 'eyeriss_16x', 'eyeriss_64x']
     for architecture in architectures:
-        dnns = ['resnet50', 'vgg16', 'deepbench', 'resnext50_32x4d']
+        dnns = ['mobilenetv2', 'unet', 'resnet50', 'transformer']
         for dnn in dnns:
-            with open('../in_config/{}_problems/layers.yaml'.format(dnn), 'r') as fd:
+            with open(os.path.join(problem_dir, '{}_problems/layers.yaml'.format(dnn)), 'r') as fd:
                 layers = yaml.load(fd, Loader=yaml.SafeLoader)
             fd.close()
             problem = {'problem': {'shape': {'name': 'CNN-Layer', 'dimensions': ['C', 'K', 'R', 'S', 'N', 'P', 'Q'],
@@ -124,9 +125,9 @@ def run():
                     report_dir = os.path.join(opt.report_dir, architecture,
                                               'sampled_episodes_{}'.format(opt.batch_size),
                                               '{}_input{}'.format(dnn, input_size), 'layer-{}'.format(i))
-                    with open('../in_config/{}_problems/{}.yaml'.format(dnn, layer), 'r') as fd:
+                    with open(os.path.join(problem_dir, '{}_problems/{}.yaml'.format(dnn, layer)), 'r') as fd:
                         layer_problem = yaml.load(fd, Loader=yaml.SafeLoader)
-                        problem['problem']['instance']['N'] = input_size
+                        problem['problem']['instance']['N'] *= input_size
                         problem['problem']['instance']['K'] = layer_problem['problem']['K']
                         problem['problem']['instance']['C'] = layer_problem['problem']['C']
                         problem['problem']['instance']['P'] = layer_problem['problem']['P']
@@ -152,7 +153,7 @@ def run():
                         fd.close()
                         continue
                     else:
-                        with open('../in_config/problem.yaml', 'w') as fd:
+                        with open(os.path.join(problem_dir, 'problem.yaml'), 'w') as fd:
                             yaml.dump(problem, fd)
                         fd.close()
 
