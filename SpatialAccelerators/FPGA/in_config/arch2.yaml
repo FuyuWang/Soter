@@ -1,0 +1,46 @@
+architecture:
+  version: 0.2
+
+  subtree:
+    - name: System
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            width: 64
+            word-bits: 16
+            block-size: 4
+      subtree:
+        - name: Accelerator
+          attributes:
+            technology: 40nm
+          local:
+            - name: GlobalBuffer
+              class: SRAM
+              attributes:
+                depth: 65536
+                width: 64
+                block-size: 4
+                word-bits: 16
+                read_bandwidth: 16
+                write_bandwidth: 16
+                vector-access-energy: 8.8
+          subtree:
+            - name: PE[0..255]
+              local:
+                - name: LocalBuffer
+                  class: SRAM
+                  attributes:
+                    depth: 32768
+                    width: 16
+                    block-size: 1
+                    word-bits: 16
+                    #meshX: 16
+                    read_bandwidth: 2
+                    write_bandwidth: 2
+                    vector-access-energy: 2.24
+                - name: MACs
+                  class: intmac
+                  attributes:
+                    datawidth: 16
+
