@@ -159,7 +159,7 @@ def run():
                         fd.close()
                         continue
                     else:
-                        with open(os.path.join(problem_dir, 'problem.yaml'), 'w') as fd:
+                        with open('../in_config/problem.yaml', 'w') as fd:
                             yaml.dump(problem, fd)
                         fd.close()
 
