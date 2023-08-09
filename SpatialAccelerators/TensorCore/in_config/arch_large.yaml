@@ -1,0 +1,64 @@
+architecture:
+  version: 0.2
+
+  subtree:
+  - name: System
+
+    local:
+    - name: MainMemory
+      class: DRAM
+      attributes:
+        width: 64
+        block-size: 8
+        word-bits: 8
+
+    subtree:
+    - name: Chip
+      attributes:
+        technology: 40nm
+
+      local:
+      - name: GlobalBuffer
+        class: SRAM
+        attributes:
+          block-size: 32
+          depth: 16384
+          width: 256
+          word-bits: 8
+
+      subtree:
+      - name: PE[0..63]
+
+        local:
+        - name: PEInputBuffer
+          class: regfile
+          attributes:
+            block-size: 8
+            depth: 2048
+            width: 64
+            word-bits: 8
+        - name: PEWeightBuffer[0..3]
+          class: regfile
+          attributes:
+            block-size: 8
+            depth: 8192
+            width: 64
+            word-bits: 8
+        - name: PEAccuBuffer[0..3]
+          class: regfile
+          attributes:
+            block-size: 3
+            depth: 2048
+            width: 72
+            word-bits: 24
+        - name: PEWeightRegs[0..63]
+          class: regfile
+          attributes:
+            block-size: 1
+            depth: 1
+            width: 8
+            word-bits: 8
+        - name: MACC[0..63]
+          class: intmac
+          attributes:
+            datawidth: 8

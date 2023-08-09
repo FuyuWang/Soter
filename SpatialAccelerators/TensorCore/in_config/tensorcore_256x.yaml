@@ -1,0 +1,66 @@
+architecture:
+  version: 0.3
+  subtree:
+    - name: system
+      attributes:
+        technology: 45nm
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            type: LPDDR4
+            word-bits: 8
+            cluster-size: 1
+            read_bandwidth: 32
+            write_bandwidth: 32
+      subtree:
+        - name: SM
+          attributes:
+            technology: 45nm
+          local:
+            - name: SMEM
+              class: SRAM
+              attributes:
+                depth: 2097152
+                width: 256
+                n_banks: 2
+                block-size: 32
+                word-bits: 8
+                cluster-size: 1
+                read_bandwidth: 42
+                write_bandwidth: 42
+          subtree:
+            - name: Subpartition[0..1023]
+              attributes:
+                technology: 45nm
+              local:
+                - name: RF
+                  class: SRAM
+                  attributes:
+                    depth: 2048
+                    width: 8
+                    n_banks: 16
+                    block-size: 1
+                    word-bits: 8
+                    cluster-size: 1
+                    meshX: 16
+                    meshY: 64
+              subtree:
+              - name: PE[0..255]
+                local:
+                  - name: LRF
+                    class: regfile
+                    attributes:
+                      depth: 1
+                      width: 8
+                      block-size: 1
+                      word-bits: 8
+                      cluster-size: 1
+                      meshX: 256
+                      meshY: 1024
+                  - name: mac
+                    class: intmac
+                    attributes:
+                      word-bits: 8
+                      meshX : 256
+                      meshY : 1024
