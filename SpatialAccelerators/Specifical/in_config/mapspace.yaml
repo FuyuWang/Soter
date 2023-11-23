@@ -1,0 +1,20 @@
+mapspace:
+  constraints:
+  - target: LocalBuffer
+    type: datatype
+    keep:
+      - Inputs
+      - Outputs
+      - Weights
+  - target: GlobalBuffer
+    type: datatype
+    keep:
+      - Inputs
+      - Outputs
+      - Weights
+  - target: DRAM
+    type: datatype
+    keep:
+      - Inputs
+      - Outputs
+      - Weights
