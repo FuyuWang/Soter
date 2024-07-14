@@ -21,6 +21,6 @@ pip install -r requirements.txt
 
 ```
 cd Simba
-sh run.sh
+CUDA_VISIBLE_DEVICES=0 python main.py --optim_obj latency --epochs 10 --accelerator Simba --workload mobilenet --layer_id 1 --batch_size 1
 ```
 
