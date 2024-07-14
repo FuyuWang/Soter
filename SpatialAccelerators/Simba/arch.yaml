@@ -1,0 +1,101 @@
+architecture:
+  version: 0.2
+
+  subtree:
+  - name: System
+
+    local:
+    - name: DRAM
+      class: DRAM
+      attributes:
+        block-size: 64
+        word-bits: 8
+        read_bandwidth: 1
+        write_bandwidth: 1
+        cluster_size: 1
+
+    subtree:
+    - name: Chip
+      attributes:
+        technology: 40nm
+
+      local:
+      - name: GlobalBuffer
+        class: SRAM
+        attributes:
+          block-size: 8
+          depth: 8192
+          width: 64
+          word-bits: 8
+          num-ports: 2
+          num-banks: 256
+          read_bandwidth: 2
+          write_bandwidth: 2
+          cluster_size: 1
+
+      subtree:
+      - name: PE[0..15]
+
+        local:
+        - name: InputBuffer
+          class: regfile
+          attributes:
+            block-size: 4
+            depth: 2048
+            width: 32
+            word-bits: 8
+            num-ports: 2
+            num-banks: 1
+            read_bandwidth: 2
+            write_bandwidth: 2
+            cluster_size: 1
+
+        - name: WeightBuffer
+          class: regfile
+          attributes:
+            block-size: 4
+            depth: 8192
+            width: 32
+            word-bits: 8
+#            meshX: 16
+            num-ports: 1
+            num-banks: 8
+            read_bandwidth: 2
+            write_bandwidth: 2
+            cluster_size: 1
+
+        - name: AccumulationBuffer
+          class: regfile
+          attributes:
+            block-size: 4
+            depth: 768
+            width: 96
+            word-bits: 24
+#            meshX: 16
+            network-word-bits: 16
+            num-ports: 2
+            num-banks: 2
+            read_bandwidth: 2
+            write_bandwidth: 2
+            cluster_size: 1
+
+        - name: Registers[0..63]
+          class: regfile
+          attributes:
+            block-size: 1
+            depth: 1
+            width: 8
+            word-bits: 8
+#            meshX: 16
+            num-ports: 2
+            num-banks: 8
+            read_bandwidth: 2
+            write_bandwidth: 2
+            cluster_size: 1
+
+        - name: MACC[0..63]
+          class: intmac
+          attributes:
+            word-bits: 8
+#            meshX: 16
+            cluster_size: 1

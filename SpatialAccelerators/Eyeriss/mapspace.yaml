@@ -1,0 +1,43 @@
+mapspace:
+  constraints:
+  - target: PsumRegFile
+    type: datatype
+    keep:
+    - Outputs
+    bypass:
+    - Weights
+    - Inputs
+  - target: WeightRegFile
+    type: datatype
+    keep:
+    - Weights
+    bypass:
+    - Inputs
+    - Outputs
+  - target: InputRegFile
+    type: datatype
+    keep:
+    - Inputs
+    bypass:
+    - Weights
+    - Outputs
+  - target: DummyBuffer
+    type: datatype
+    bypass:
+      - Inputs
+      - Weights
+      - Outputs
+  - target: GlobalBuffer
+    type: datatype
+    keep:
+    - Inputs
+    - Outputs
+    bypass:
+    - Weights
+  - target: DRAM
+    type: datatype
+    keep:
+      - Inputs
+      - Outputs
+      - Weights
+

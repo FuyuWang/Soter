@@ -1,0 +1,13 @@
+problem:
+  C: 256
+  Hdilation: 1
+  Hstride: 2
+  K: 128
+  N: 1
+  P: 100
+  Q: 100
+  R: 2
+  S: 2
+  Wdilation: 1
+  Wstride: 2
+  type: T2D

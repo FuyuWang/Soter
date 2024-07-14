@@ -1,0 +1,82 @@
+architecture:
+  # ============================================================
+  # Architecture Description
+  # ============================================================
+  version: 0.3
+  subtree:
+    - name: system
+      local:
+        - name: DRAM
+          class: DRAM
+          attributes:
+            word-bits: 16
+            read_bandwidth: 16
+            write_bandwidth: 16
+            cluster_size: 1
+      subtree:
+        - name: chip
+          attributes:
+            technology: 45nm
+          local:
+            - name: GlobalBuffer
+              class: SRAM
+              attributes:
+                depth: 32768
+                width: 64
+                n_banks: 32
+                block-size: 4
+                word-bits: 16
+                read_bandwidth: 16
+                write_bandwidth: 16
+                cluster_size: 1
+            - name: DummyBuffer[0..15]
+              class: regfile
+              attributes:
+                depth: 1
+                width: 64
+                word-bits: 16
+                block-size: 4
+#                meshX: 16
+                cluster_size: 1
+          subtree:
+          - name: PE[0..255]
+            local:
+              - name: InputRegFile
+                class: regfile
+                attributes:
+                  depth: 3
+                  width: 64
+                  block-size: 4
+                  word-bits: 16
+#                  meshX: 16
+                  read_bandwidth: 2
+                  write_bandwidth: 2
+                  cluster_size: 1
+              - name: WeightRegFile
+                class: regfile
+                attributes:
+                  depth: 48
+                  width: 64
+                  block-size: 4
+                  word-bits: 16
+#                  meshX: 16
+                  read_bandwidth: 2
+                  write_bandwidth: 2
+                  cluster_size: 1
+              - name: PsumRegFile
+                class: regfile
+                attributes:
+                  depth: 4
+                  width: 64
+                  block-size: 4
+                  word-bits: 16
+#                  meshX: 16
+                  read_bandwidth: 2
+                  write_bandwidth: 2
+                  cluster_size: 1
+              - name: mac
+                class: intmac
+                attributes:
+                  word-bits: 16
+#                  meshX : 16
+                  cluster_size: 1
