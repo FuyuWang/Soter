@@ -67,7 +67,11 @@ def main():
             problem['problem']['instance']['H'] = layer_problem['problem']['H']
         else:
             problem['problem']['instance']['H'] = 1
-        problem['problem']['instance']['N'] = layer_problem['problem']['N'] * batch_size
+        if 'type' in layer_problem['problem'].keys() and layer_problem['problem']['type'] == 'BMM':
+            problem['problem']['instance']['N'] = layer_problem['problem']['N']
+            problem['problem']['instance']['H'] = layer_problem['problem']['H'] * batch_size
+        else:
+            problem['problem']['instance']['N'] = layer_problem['problem']['N'] * batch_size
         problem['problem']['instance']['K'] = layer_problem['problem']['K']
         problem['problem']['instance']['C'] = layer_problem['problem']['C']
         problem['problem']['instance']['P'] = layer_problem['problem']['P']
@@ -99,7 +103,4 @@ if __name__ == '__main__':
 
     parser.add_argument('--accelerator', type=str, default='arch', help='accelerator accelerator')
     parser.add_argument('--workload', type=str, default=None)
-    parser.add_argument('--layer_id', type=int, default=None)
-    parser.add_argument('--batch_size', type=int, default=1)
-
-    main()
+    parser.add_argument('--layer_id
