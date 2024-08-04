@@ -10,8 +10,8 @@ architecture:
           class: DRAM
           attributes:
             word-bits: 16
-            read_bandwidth: 16
-            write_bandwidth: 16
+            read_bandwidth: 4
+            write_bandwidth: 4
             cluster_size: 1
       subtree:
         - name: chip
@@ -49,8 +49,8 @@ architecture:
                   block-size: 4
                   word-bits: 16
 #                  meshX: 16
-                  read_bandwidth: 2
-                  write_bandwidth: 2
+                  read_bandwidth: 16
+                  write_bandwidth: 16
                   cluster_size: 1
               - name: WeightRegFile
                 class: regfile
@@ -60,8 +60,8 @@ architecture:
                   block-size: 4
                   word-bits: 16
 #                  meshX: 16
-                  read_bandwidth: 2
-                  write_bandwidth: 2
+                  read_bandwidth: 16
+                  write_bandwidth: 16
                   cluster_size: 1
               - name: PsumRegFile
                 class: regfile
@@ -71,8 +71,8 @@ architecture:
                   block-size: 4
                   word-bits: 16
 #                  meshX: 16
-                  read_bandwidth: 2
-                  write_bandwidth: 2
+                  read_bandwidth: 16
+                  write_bandwidth: 16
                   cluster_size: 1
               - name: mac
                 class: intmac
