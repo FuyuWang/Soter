@@ -212,8 +212,8 @@ class Model(object):
                     R_coef = program_seq_disorder.new_ones(batch_size).float().fill_(1e-12)
                     S_coef = program_seq_disorder.new_ones(batch_size).float().fill_(1e-12)
 
-        coef_arr = torch.stack([R_coef, S_coef, P_coef, Q_coef, C_coef, K_coef, N_coef, H_coef], dim=1)[:, loop_ind]
-        sub_arr = torch.stack([R_sub, S_sub, P_sub, Q_sub, C_sub, K_sub, N_sub, H_sub], dim=1)[:, loop_ind]
+        coef_arr = torch.stack([R_coef, S_coef, P_coef, Q_coef, C_coef, K_coef, H_coef, N_coef], dim=1)[:, loop_ind]
+        sub_arr = torch.stack([R_sub, S_sub, P_sub, Q_sub, C_sub, K_sub, H_sub, N_sub], dim=1)[:, loop_ind]
 
         remain_buffer_size = (buffer_size - sub_arr.float()) / coef_arr.float()
 
@@ -425,8 +425,8 @@ class Model(object):
                 R_coef = program_seq_disorder.new_ones(batch_size).float().fill_(1e-12)
                 S_coef = program_seq_disorder.new_ones(batch_size).float().fill_(1e-12)
 
-        coef_arr = torch.stack([R_coef, S_coef, P_coef, Q_coef, C_coef, K_coef, N_coef, H_coef], dim=1)[:, loop_ind]
-        sub_arr = torch.stack([R_sub, S_sub, P_sub, Q_sub, C_sub, K_sub, N_sub, H_sub], dim=1)[:, loop_ind]
+        coef_arr = torch.stack([R_coef, S_coef, P_coef, Q_coef, C_coef, K_coef, H_coef, N_coef], dim=1)[:, loop_ind]
+        sub_arr = torch.stack([R_sub, S_sub, P_sub, Q_sub, C_sub, K_sub, H_sub, N_sub], dim=1)[:, loop_ind]
 
         remain_buffer_size = (buffer_size - sub_arr.float()) / coef_arr.float()
 
