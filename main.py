@@ -46,9 +46,9 @@ def main():
                                                                 [['R', 'Wdilation'],
                                                                  ['P', 'Wstride']],
                                                                 [['S', 'Hdilation'],
-                                                                 ['Q', 'Hstride']]]},
-                              {'name': 'Inputs', 'projection': [[['N']], [['H']], [['C']], [['Q']], [['P']]],
-                               'read-write': True}]
+                                                                 ['Q', 'Hstride']]],
+                               'read-write': True},
+                              {'name': 'Inputs', 'projection': [[['N']], [['H']], [['C']], [['Q']], [['P']]]}]
             problem['problem']['instance']['type'] = 'T2D'
         else:
             problem['problem']['shape']['data-spaces'] = [
@@ -103,4 +103,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--accelerator', type=str, default='arch', help='accelerator accelerator')
     parser.add_argument('--workload', type=str, default=None)
-    parser.add_argument('--layer_id
+    parser.add_argument('--layer_id', type=int, default=None)
+    parser.add_argument('--batch_size', type=int, default=1)
+
+    main()
