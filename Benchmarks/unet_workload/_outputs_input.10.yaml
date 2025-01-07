@@ -10,3 +10,4 @@ problem:
   S: 2
   Wdilation: 1
   Wstride: 2
+  type: T2D
