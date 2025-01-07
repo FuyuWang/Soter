@@ -4,8 +4,8 @@ problem:
   Hstride: 1
   K: 128
   N: 1
-  P: 284
-  Q: 284
+  P: 282
+  Q: 282
   R: 3
   S: 3
   Wdilation: 1
